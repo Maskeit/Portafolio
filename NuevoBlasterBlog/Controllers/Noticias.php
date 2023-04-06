@@ -32,13 +32,13 @@ if($conexion == null){
 
 class Noticias{
 
-    public function __construct(
-    private $idArticle, 
-    private $titulo, 
-    private $extracto, 
-    private $fecha,
-    private $texto, 
-    private $imagen
+    private function __construct(
+    $idArticle, 
+    $titulo, 
+    $extracto, 
+    $fecha,
+    $texto, 
+    $imagen
     )
     {}
 
