@@ -24,8 +24,6 @@ class Noticias {
     }
 }
 
-
-
 $conexionBD = new DB();
 $conexion = $conexionBD->db_connect();
 
@@ -46,11 +44,41 @@ if($conexion == null){
              $noticia = new Noticias($idArticle, $titulo, $extracto, $fecha, $texto, $imagen);
              $noticias[] = $noticia;
         }
+        $noticias_json = json_encode($noticias);
+        echo '<script>var noticias = ' .$noticias_json . ';</script>';
+
     } else {
         echo "error al realizar la consulta";
     }
 }
 
-foreach ($noticias as $noticia) {
-    echo $noticia->getInfo();
-}
+
+// if($conexion == null){
+//     echo "error al conectar a la base de datos";
+// } else {
+//     $resultado_book = mysqli_query($conexion, "SELECT * FROM articulos");
+
+//     if($resultado_book){
+//         $noticias = []; // Inicializar la variable $noticias
+//         while($fila = mysqli_fetch_assoc($resultado_book)){
+//              $idArticle = $fila["id"];
+//              $titulo = $fila["titulo"];
+//              $extracto = $fila["extracto"];
+//              $fecha = $fila["fecha"];
+//              $texto = $fila["texto"];
+//              $imagen = $fila["thumb"];
+//              $noticia = new Noticias($idArticle, $titulo, $extracto, $fecha, $texto, $imagen);
+//              $noticias[] = $noticia;
+//         }
+//     } else {
+//         echo "error al realizar la consulta";
+//     }
+// }
+
+// foreach ($noticias as $noticia) {
+//     echo $noticia->getInfo();
+// }
+
+// $noticias_json = json_encode($noticias);
+// echo "<script>var noticias = $noticias_json;
+//         console.log(noticias)</script>";

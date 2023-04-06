@@ -33,27 +33,23 @@
     <!--
         Aqui comienza el cuerpo del inicio
     -->
-    <?php include_once "../Models/noticias.php"; ?>
-    <?php foreach ($noticias as $noticia):?>
     <div class="col-8">
         <div id="content" class="content">
             <!--publicaciones  se maneja con el DOM-->
-            <div class="card text-center">
+            <!-- <div class="card text-center">
                 <div class="card-header">
-                    <h1><?php echo $titulo ?></h1>
+                    <h1></h1>
                 </div>
                 <div class="card-body">
                 <img src="..." class="img-fluid" alt="...">
-                    <p class="card-text"><?php echo $texto ?></p>
+                    <p class="card-text"></p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
                 <div class="card-footer text-muted">
-                <?php echo $fecha ?>
                 </div>
-            </div>
-        </div>
+            </div> -->
+        </div> 
     </div>
-    <?php endforeach ?>
     <!-- <div class="col-4">
         <div id="authors" class="list=gruop">
             -- Autores --
