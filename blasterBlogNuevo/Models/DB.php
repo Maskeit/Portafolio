@@ -27,4 +27,17 @@ class DB{
             return $this->conexion;
         }
     }
+
+    /* Método para autenticar al usuario */
+    public function authenticate($username, $password) {
+        $query = "SELECT * FROM username WHERE username='$username'";
+        $result = mysqli_query($this->conexion, $query);
+        $row = mysqli_fetch_assoc($result);
+        $hashed_password = $row['passwd'];
+        if (password_verify($password, $hashed_password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

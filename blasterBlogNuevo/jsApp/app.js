@@ -1,4 +1,3 @@
-
 const app = {
     urlDatos : "../Models/Noticias.php",
     noticias: [], //aqui almacenamos los datos

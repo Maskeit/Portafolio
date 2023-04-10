@@ -11,17 +11,14 @@
     </div>
     <div class="card mt-5 w-50 mx-auto">
         <div class="card-body">
-            <form action="" id="login-form" method="post">
+            <form action="../Controllers/LoginController.php" id="login-form" method="post">
                 <div class="form-group">
-                    <?php
-                         include "../Controllers/LoginController.php"; 
-                    ?>
                     <label for="username">Usuario</label>
                     <input type="text" 
                             id="username"
                             class="form-control"
                             name="username"
-                            placeholder="usuario" required>
+                            placeholder="usuario" required><!--id enviado al post-->
                 </div>
                 <div class="form-group">
                     <label for="passwd">Contraseña</label>
@@ -29,7 +26,7 @@
                              name="passwd"
                              id="passwd"
                              class="form-control"
-                             required>
+                             required><!--id enviado al post-->
                 </div>
                 <small class="form-text text-danger d-none mb-2" id="error">
                     Datos de inicio de sesión incorrectos.
