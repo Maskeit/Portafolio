@@ -7,7 +7,7 @@
     class user extends DB   {
         public $table;
         function __construct(){
-            paren::__construct();
+            parent::__construct();
             $this->table = $this->db_connect();
         }
 
