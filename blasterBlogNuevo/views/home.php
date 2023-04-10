@@ -1,4 +1,5 @@
 <?php
+    //este es el inicio para los que tengan una sesion iniciada
     include("layouts/main.php");
 
     head();
@@ -33,20 +34,23 @@
         </div>
     </div>
     <div class="col-3">
-        <ul class="list-group">
-            <li class="list-group-item active" aria-current="true">An active item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-            <li class="list-group-item">A fourth item</li>
-            <li class="list-group-item">And a fifth one</li>
-        </ul>
+        <div class="temas-container">
+            <h1>temas</h1>
+            <ul>
+                <li>Cine</li>
+                <li>Arquitectura</li>
+                <li>Arte</li>
+                <li>Otros.</li>
+            </ul>
+        </div>
     </div>
+
     <!--
         Aqui comienza el cuerpo del inicio
     -->
-    <?php include_once "../Controllers/Noticias.php"; ?>
+    <?php include_once "../Models/Noticias.php"; ?>
     <?php foreach ($noticias as $noticia):?>
-    <div class="col-8">
+    <div class="col-9">
         <div id="content" class="content">
             <!--publicaciones  se maneja con el DOM-->
             <div class="card text-center">
@@ -66,11 +70,6 @@
         </div>
     </div>
     <?php endforeach ?>
-    <div class="col-4">
-        <div id="authors" class="list=gruop">
-            <!-- Autores -->
-        </div>
-    </div>
 </div>
 <?php
     scripts();
