@@ -1,4 +1,5 @@
 <?php
+    //este deberia ser el inicio o lobby para los que no tengan una sesion iniciada
     include("layouts/main.php");
 
     head();
