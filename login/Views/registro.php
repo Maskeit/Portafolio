@@ -11,7 +11,7 @@
     </div>
     <div class="card mt-5 w-50 mx-auto">
         <div class="card-body">
-            <form action="../Controllers/registroController.php" id="login-form" method="post">
+            <form action="../Controllers/registroController.php" id="login-form" method="post" name="formData">
                 <div class="form-group">
                     <label for="email">Correo</label>
                     <input type="text" 
@@ -22,19 +22,15 @@
                 </div>
                 <div class="form-group">
                     <label for="username">Elija un nombre de Usuario</label>
+                    <small class="form-text text-danger d-none mb-2" 
+                            id="usuarioOcupado">
+                    
+                    </small>
                     <input type="text" 
                             id="username"
                             class="form-control"
                             name="usuario"
                             placeholder="usuario" required>
-                </div>
-                <div class="form-group">
-                    <label for="username">Edad</label>
-                    <input type="text" 
-                            id="edad"
-                            class="form-control"
-                            name="edad"
-                            placeholder="edad" required>
                 </div>
                 <div class="form-group">
                     <label for="passwd">Contraseña</label>
@@ -53,10 +49,10 @@
                              required>
                 </div>
                 <small class="form-text text-danger d-none mb-2" id="error">
-                    Datos de inicio de sesión incorrectos.
+                    
                 </small>
                 <div class="d-grid gap-2 my-2">
-                    <button class="btn btn-primary" type="submit"><i class="bi bi-person-circle" name="btn-submit"></i>
+                    <button class="btn btn-primary" type="submit"><i class="bi bi-person-circle" name="btn-submit" id="btn"></i>
                         Registrarse
                     </button>
                     <div class="pequenoTexto"><a href="login.php">¿ya tienes una cuenta? Inicia sesion aqui.</a></div>

@@ -3,13 +3,11 @@ include("DB.php");
 class Usuario{
     private $user;
     private $email;
-    private $edad;
     private $passwd;
 
     public function __construct(...$args) {
         $this->user = $args[0];
         $this->email = isset($args[1]) ? $args[1] : null;
-        $this->edad = isset($args[2]) ? $args[2] : null;
         $this->passwd = $args[count($args) - 1];
     }
     
@@ -30,7 +28,6 @@ class Usuario{
                     $email = $fila['correo'];
                     $user = $fila['usuario'];
                     $passwd = $fila['passwd'];
-                    $edad = $fila['edad'];
                     $usuario = new Usuario($user ,$passwd,);
                     $usuarios[] = $usuario;
                 }
@@ -60,10 +57,9 @@ class Usuario{
     }        
     // En la siguiente función, el parámetro $user es el nombre de usuario que se quiere comprobar
     
-    function registrar(DB $db, $usuario, $email, $edad, $passwd) {
+    function registrar(DB $db, $usuario, $email, $passwd) {
         //crear variables temporales
         $usuario_temp = $usuario;
-        $edad_temp = $edad;
         $email_temp = $email;
         $passwd_temp = $passwd;
         // Realizar la inserción de datos en la base de datos
@@ -72,9 +68,9 @@ class Usuario{
         if(!$conn){
         return null;
         }
-        $sql = 'INSERT INTO usuarios (usuario, edad, email, passwd) VALUES (?, ?, ?, ?)';
+        $sql = 'INSERT INTO usuarios (usuario, email, passwd) VALUES (?, ?, ?)';
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("siss", $usuario_temp, $edad_temp, $email_temp, $passwd_temp);
+        $stmt->bind_param("sss", $usuario_temp, $email_temp, $passwd_temp);
         $stmt->execute();
 
         return $conn->affected_rows; //retorna la cantidad de filas afectadas por la consulta
@@ -88,14 +84,16 @@ class Usuario{
         if(!$conn){
             return null;
         }
-        $sql = ('SELECT * FROM usuarios WHERE usuario = ? AND passwd = ?');
+        $sql = ('SELECT * FROM usuarios WHERE (usuario = ? OR email = ?) AND passwd = ?');
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ss', $usuario, $passwd);
+        $stmt->bind_param('sss', $usuario, $usuario, $passwd);
         $stmt->execute();
         $result = $stmt->get_result();
         $fila = $result->fetch_assoc();
         if($fila !== null){
-            return $fila;
+            $userFound = $fila['usuario'];
+            $correo = $fila['email'];        
+            return $userFound; //retorna el nombre de usuario
         } else{
             return false;
         }
@@ -103,3 +101,4 @@ class Usuario{
     
 }
 
+//malejandre@gmail.com  

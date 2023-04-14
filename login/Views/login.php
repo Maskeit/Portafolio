@@ -18,7 +18,7 @@
                             id="username"
                             class="form-control"
                             name="usuario"
-                            placeholder="usuario" required>
+                            placeholder="usuario/correo" required>
                 </div>
                 <div class="form-group">
                     <label for="passwd">Contraseña</label>
@@ -29,7 +29,7 @@
                              required>
                 </div>
                 <small class="form-text text-danger d-none mb-2" id="error">
-                    Datos de inicio de sesión incorrectos.
+                    
                 </small>
                 <div class="d-grid gap-2 my-2">
                     <button class="btn btn-primary" type="submit"><i class="bi bi-person-circle" name="btn-submit"></i>
@@ -41,7 +41,7 @@
         </div>
     </div>
 </div>
-
+<script src="../Controllers\public\valForms.js"></script> 
 <?php
 scripts();
 ?>

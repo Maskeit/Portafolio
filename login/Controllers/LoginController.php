@@ -25,9 +25,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     }else{
         $conexionDB = new DB();
         $usuario = new Usuario($nombre_usuario, $passwd );
+        $succes = $usuario->logear($conexionDB, $nombre_usuario, $passwd);
         /**aqui se crea la sesion */
-        if($usuario->logear($conexionDB, $nombre_usuario, $passwd)){
-            $_SESSION['usuario'] = $nombre_usuario;
+        if($succes){
+            $_SESSION['usuario'] = $succes;
+            // if (isset($_SESSION['usuario'])) {
+            //     var_dump('<br>'. $_SESSION['usuario']);
+            // } else {
+            //     echo "La variable de sesión 'usuario' no está definida.";
+            // }
             //despues de registrar al usuario redirigiremos para que inicie sesion
             header('Location: ../Views/inicio.php');
         }else{
