@@ -34,9 +34,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     } else{
         //comprobamos que el usuario no exista ya
         $usuarioCheck = new Usuario($nombre_usuario, $passwd );
+        $username = $usuarioCheck->authenticate($nombre_usuario);
 
-        if($usuarioCheck->authenticate($nombre_usuario)){
-            //header('Content-Type: application/json');
+        if($username){
+            header('Content-Type: ..\public\valForms.js');
             echo json_encode(["status" => "ocupado"]);
             exit();
             //header('Location: ../Views/registro.php');

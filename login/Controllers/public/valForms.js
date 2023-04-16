@@ -1,25 +1,3 @@
-$.ajax({
-  type: "POST",
-  url: "../Controllers/RegistroController.php",
-  data: {
-    username: $('#username').val()
-  },
-  dataType: "json",
-  success: function(response) {
-    console.log(response);
-    if (response.status == "ocupado") {
-      var usuarioOcupado = document.getElementById("usuarioOcupado");
-      usuarioOcupado.classList.remove('d-none');
-      usuarioOcupado.classList.add('d-block');
-      usuarioOcupado.textContent = "El nombre de usuario ya está ocupado.";
-    }
-  },
-  error: function() {
-    alert("Hubo un error al procesar la solicitud");
-  }
-});
-
-
 (function() {
     var formData = document.getElementById("login-form"),
         elementos = formData.elements,
@@ -95,3 +73,25 @@ $.ajax({
           return false;
     });
   })();
+
+  $.ajax({
+    type: "POST",
+    url: "../Controllers/RegistroController.php",
+    data: {
+      username: $('#username').val()
+    },
+    dataType: "json",
+    success: function(response) {
+      console.log(response);
+      if (response.status == "ocupado") {
+        var usuarioOcupado = document.getElementById("usuarioOcupado");
+        usuarioOcupado.classList.remove('d-none');
+        usuarioOcupado.classList.add('d-block');
+        usuarioOcupado.textContent = "El nombre de usuario ya está ocupado.";
+      }
+    },
+    // error: function() {
+    //   alert("Hubo un error al procesar la solicitud");
+    // }
+  });
+  
