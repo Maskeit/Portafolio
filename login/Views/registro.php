@@ -11,7 +11,7 @@
     </div>
     <div class="card mt-5 w-50 mx-auto">
         <div class="card-body">
-            <form action="../Controllers/registroController.php" id="login-form" method="post" name="formData">
+            <form action="../Controllers/RegistroController.php" id="login-form" method="post" name="formData">
                 <div class="form-group">
                     <label for="email">Correo</label>
                     <input type="text" 
@@ -61,7 +61,29 @@
         </div>
     </div>
 </div>
-
+<script>
+    $.ajax({
+        type: "POST",
+        url: "../Controllers/RegistroController.php",
+        data: {
+          username: $('#username').val()
+        },
+        dataType: "json",
+        success: function(response) {
+          console.log(response);
+          if (response.status == "ocupado") {
+            var usuarioOcupado = document.getElementById("usuarioOcupado");
+            usuarioOcupado.classList.remove('d-none');
+            usuarioOcupado.classList.add('d-block');
+            usuarioOcupado.textContent = "El nombre de usuario ya está ocupado.";
+          }
+        },
+        // error: function() {
+        //   alert("Hubo un error al procesar la solicitud");
+        // }
+      });
+      
+</script>
 <?php
 scripts();
 ?>

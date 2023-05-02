@@ -6,7 +6,6 @@ if(isset($_SESSION['usuario'])){
 }
 include ("../Models/Usuario.php");
 
-//comprobamos si ya han sido enviados los datos
 if($_SERVER['REQUEST_METHOD']=='POST'){
     //validamos que los datos hayan sido rellenados
     $nombre_usuario = filter_var(strtolower($_POST['usuario']), FILTER_SANITIZE_STRING);

@@ -7,7 +7,7 @@ class DB{
     private $db_passwd;
     private $conexion;
 
-    public function __construct($dbh = "localhost", $dbn = "blaster", $dbu="root", $dbp = ""){
+    public function __construct($dbh = "localhost", $dbn = "blasterblog", $dbu="root", $dbp = ""){
         $this->db_host = $dbh;
         $this->db_name = $dbn;
         $this->db_user = $dbu;

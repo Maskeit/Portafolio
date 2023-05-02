@@ -1,8 +1,12 @@
-<?php
+<?php session_start();
     //este es el inicio para los que tengan una sesion iniciada
+if(isset($_SESSION['usuario'])){
     include("layouts/main.php");
-
     head();
+}else{
+    header('Location: inicio.php');
+    die();
+}   
 ?>
 <div class="row mx-auto" style="90%">
     <div class="col-9">

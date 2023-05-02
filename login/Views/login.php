@@ -41,7 +41,7 @@
         </div>
     </div>
 </div>
-<script src="../Controllers\public\valForms.js"></script> 
+
 <?php
 scripts();
 ?>

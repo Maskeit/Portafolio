@@ -13,6 +13,14 @@
         <div class="card-body">
             <form action="" id="registro-form">
                 <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" 
+                            id="name"
+                            class="form-control"
+                            name="name"
+                            placeholder="nombre" required>
+                </div>
+                <div class="form-group">
                     <label for="username">Usuario</label>
                     <input type="text" 
                             id="username"

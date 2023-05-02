@@ -1,32 +1,44 @@
-<?php
-include_once "../Models/Login.php";
-include_once "../Models/DB.php";
+<?php session_start();
+//comprobamos si ya se tiene una sesion inciada y si es asi lo redirigimos al contenido
+if(isset($_SESSION['usuario'])){
+    header('Location: ../Views/inicio.php');
+    die();
+}
+include ("../Models/Usuario.php");
 
-function login(){
-    if(isset($_SESSION['username'])){ #verificamos si no se tiene una sesion, si es asi lo redirigimos directo al contenido
-        header('Location: ../index.php');
-        die();
-    }
-    //comprobamos si los datos han sido recibidos
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    //validamos que los datos hayan sido rellenados
+    $nombre_usuario = filter_var(strtolower($_POST['usuario']), FILTER_SANITIZE_STRING);
+    $passwd = $_POST['passwd'];
+    // $passwd = hash('sha512', $passwd);
+
     $errores = '';
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if( !empty($_POST['username']) and !empty($_POST["passwd"]) ){
-            $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-            $passwd = filter_var($_POST['passwd'], FILTER_SANITIZE_STRING);
-            //$passwd_hashed = password_hash($passwd, PASSWORD_DEFAULT);
-            $login = new Login(null, null, $username, $passwd);//llama a la funcion login
-        } else {
-            $errores .= '<li>Por favor rellena todos los campos correctamente</li>';
-        }
+
+    //Comprobamos que ninguno de los campos este vacio
+    if(empty($nombre_usuario) or empty($passwd)){
+        $errores = '<li>Por favor rellene los campos correctamente.</li>';
     }
-    // Solo intenta iniciar sesión si se recibieron datos válidos
-    if (isset($login) && $login->checkLogin()) {
-        // Si el inicio de sesión es exitoso, redirecciona a la página de inicio
-        header("Location: ../views/home.php");
-        exit();
-    } else {
-        // Si el inicio de sesión falla, redirecciona a la página de inicio de sesión
-        header("Location: ../views/login.php?error=1");
-        exit();
+    //verificamos que la variable errores este vacia para seguir
+    if (!empty($errores)) {
+        echo "<ul>" . $errores . "</ul>";
+    }else{
+        $conexionDB = new DB();
+        $usuario = new Usuario($nombre_usuario, $passwd );
+        $succes = $usuario->logear($conexionDB, $nombre_usuario, $passwd);
+        /**aqui se crea la sesion */
+        if($succes){
+            $_SESSION['usuario'] = $succes;
+            // if (isset($_SESSION['usuario'])) {
+            //     var_dump('<br>'. $_SESSION['usuario']);
+            // } else {
+            //     echo "La variable de sesión 'usuario' no está definida.";
+            // }
+            //despues de registrar al usuario redirigiremos para que inicie sesion
+            header('Location: ../Views/inicio.php');
+        }else{
+            header('Location: ../Views/login.php');
+            // $errores = '<li>Credenciales incorrectas</li>';
+            // echo "<ul>" . $passwd . $errores . "</ul>";
+        }
     }
 }

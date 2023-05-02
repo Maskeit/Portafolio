@@ -1,3 +1,4 @@
+
 <?php
 //establecemos los parametros de la clase
 class DB{
@@ -8,7 +9,7 @@ class DB{
     public $conexion;
 
     //al construct le añadimos los argumentos que va tomar la funcion
-    public function __construct($dbh = "localhost", $dbu = "root", $dbp = "", $dbn = "login",){
+    public function __construct($dbh = "localhost", $dbu = "root", $dbp = "", $dbn = "login"){
         $this->db_host = $dbh;
         $this->db_user = $dbu;
         $this->db_passwd = $dbp;
