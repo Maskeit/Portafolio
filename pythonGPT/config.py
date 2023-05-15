@@ -3,7 +3,7 @@
 
 #IMPORTANTE INSTALAR LOS REQUERIMIENTOS DEL ARCHIVO "requirements.txt" con $  pip install requierements.txt
 #Llave de la api generada
-api_key = "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"
+api_key = "sk-llave"
 
 #Roles
 """
