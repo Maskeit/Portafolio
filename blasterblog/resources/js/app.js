@@ -14,6 +14,9 @@ const app = {
         myposts : ruta +"/resources/views/autores/myposts.php",
         postcomments : ruta+"/app/app.php?_pm",
         savecomment : ruta +"/app/app.php",
+        allposts : ruta + "/resources/views/admin/allposts.php",
+        config : ruta + "/resources/views/admin/config.php",
+        carouselroute : ruta +"/resources/app/app.php?_car",
     },
     user : {
         sv : false,
@@ -22,9 +25,27 @@ const app = {
     },
     pp : $("#prev-posts"),
     lp : $("#content"),
-
+    car1 : $("#itemsCarouselFirst"),
     view : function(route){
         location.replace(this.routes[route]);
+    },
+    carouselImages : function(){
+        let html =`<b>Aún no hay imagenes en este blog</b>`;
+        let imagesroute = this.ruta + "/resources/images/"
+        this.car1.html("");
+        fetch(this.routes.carouselroute)
+            .then( resp => resp.json())
+            .then( ccresp =>{
+                if( ccresp.length > 0){
+                    html = `
+                    <img src=${imagesroute +image[0].id } class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 id="carouselname" class="">First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                    ` ;
+                }
+            }).catch( err => console.error(err));
     },
     previousPosts : function(){
         let html = `<b>Aún no hay publicaciones en este blog</b>`;
@@ -61,15 +82,18 @@ const app = {
             }).catch( err => console.error( err ));
 
     },
+
     lastPost : function(limit){
         let html = "<h2>Aún no hay publicaciones</h2>";
         this.lp.html("");
         fetch(this.routes.lastpost + "&limit=" + limit)
             .then( response => response.json())
             .then( lpresp => {
-                if( lpresp.length > 0 ){
+                if( lpresp.length > 0){
                     html = this.postHTMLLoad(lpresp);
                 }
+                console.log(lpresp); 
+                console.log(lpresp[0].active); 
                 this.lp.html(html);
             }).catch( err => console.error( err ));
     },

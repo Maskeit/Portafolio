@@ -104,35 +104,15 @@ class DB {
         }
         return json_encode($result);
     }
+    
     public function create(){
-        $sql = 'INSERT INTO ' . str_replace("Models\\","",get_class($this)) .
-                    ' (' . implode(",", $this->campos ) . ') VALUES (' . 
-                    trim(str_replace("&", "?,", str_pad("", count($this->campos), "&")), ",") . ');';
+        $sql = 'insert into '. str_replace("Models\\","",get_class($this)) .
+                    ' (' . implode("," , $this->campos ) .') values (' . 
+                    trim(str_replace("&","?,",str_pad("",count($this->campos),"&")),",") . ');';
         $stmt = $this->table->prepare($sql);
-    
-        // Preparar los valores para la llamada a bind_param()
-        $valores = [$this->valores[0], $this->valores[1], $this->valores[2], $this->valores[3]];
-    
-        // Agregar el tipo de dato 'b' para el archivo de imagen
-        $tiposDatos = str_pad("", count($this->campos), "s") . "b";
-    
-        // Unir los valores y tipos de datos en un único array
-        $bindParams = array_merge([$tiposDatos], $valores);
-    
-        // Usar call_user_func_array() para pasar el array de parámetros a bind_param()
-        call_user_func_array([$stmt, 'bind_param'], $bindParams);
-    
+        $stmt->bind_param(str_pad("",count($this->campos),"s"),...$this->valores);
         return $stmt->execute();
     }
-    
-    // public function create(){
-    //     $sql = 'insert into '. str_replace("Models\\","",get_class($this)) .
-    //                 ' (' . implode("," , $this->campos ) .') values (' . 
-    //                 trim(str_replace("&","?,",str_pad("",count($this->campos),"&")),",") . ');';
-    //     $stmt = $this->table->prepare($sql);
-    //     $stmt->bind_param(str_pad("",count($this->campos),"s"),...$this->valores);
-    //     return $stmt->execute();
-    // }
 
     //update miguel
     // public function update($datos){

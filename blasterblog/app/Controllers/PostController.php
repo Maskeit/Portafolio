@@ -5,6 +5,7 @@
     use Models\posts;
     use Models\user;
     use Models\comments;
+    use Models\carousel;
     use Controllers\auth\LoginController as LoginController;
 
     class PostController {
@@ -12,6 +13,7 @@
         private $userId;
         private $title;
         private $body;
+        public $idCarousel;
 
         public function __construct(){
             $ua = new LoginController();
@@ -106,5 +108,10 @@
                                 ];
             print_r($comment->create());
 
+        }
+        public function getCarousel($cid){ //cid es carousel id
+            $carousel = new carousel();
+            $result = $carousel->where([['id',$this->idCarousel]])->get();
+            return $result;               
         }
     }

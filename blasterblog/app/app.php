@@ -5,7 +5,6 @@ namespace app;
 require_once "autoloader.php";
 use Controllers\auth\LoginController as LoginController;
 use Controllers\PostController as PostController;
-
 if(!empty($_POST)){
 
     //*************LOGIN */
@@ -127,7 +126,7 @@ if(!empty($_GET)){
         print_r($post->getPosts(1,$pid));
     }
 
-    //******************Mostrar publicacion seleccionada VERPOST */
+    //******************Mostrar publicacion seleccionada VERPOST en mi tablon*/
     $vp = in_array('_vp',array_keys(filter_input_array(INPUT_GET)));
     if($vp){
         $pid = filter_input_array(INPUT_GET)["pid"];        
@@ -172,6 +171,13 @@ if(!empty($_GET)){
     if($ud){
         $pid = filter_input_array(INPUT_GET)["pid"];
         $post = new PostController();
+    }
+    /************************ cargar imagen del carousel ********************************** */
+    $car = in_array('_car',array_keys(filter_input_array(INPUT_GET)));
+    if($car){
+        $cid = filter_input_array(INPUT_GET)["cid"];
+        $carousel = new PostController();
+        print($carousel->getCarousel($cid));
     }
 }
 

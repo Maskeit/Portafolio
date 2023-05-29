@@ -72,6 +72,22 @@
                         >Mis publicaciones</button>
                     </li>
                     <?php } ?>
+                    <?php if(!is_null($ua) && $ua->sv && $ua->tipo == 3){ ?>
+                    <li class="nav-item">
+                        <button class="border-dark rounded-top nav-link btn btn-light m-1" 
+                                type="button" aria-current="page"
+                                onclick="app.view('config')"
+                                style="background-color: rgba(160, 79, 241, 0.8)"
+                        >Ajustes del Blog</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="border-dark rounded-top nav-link btn btn-light m-1" 
+                                type="button" aria-current="page"
+                                onclick="app.view('allposts')"
+                                style="background-color: rgba(160, 79, 241, 0.8)"
+                        >Todas las publicaciones</button>
+                    </li>
+                    <?php } ?>
                 </ul>
                  <ul   class="navbar-nav ml-auto mb-2 d-flex">
 

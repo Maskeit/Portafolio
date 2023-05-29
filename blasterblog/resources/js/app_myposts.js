@@ -6,7 +6,7 @@ const app_myposts = {
     dp : $("#deletePost"),
     vp : $("#verPost"),
     ep : $("#edPost"),
-
+    alp : $("#all-posts"),
     postsData : [],
 
     getMyPosts : function(uid){
@@ -62,6 +62,8 @@ const app_myposts = {
         }
     },
     verPost: function(pid) {
+    // elimina cualquier modal existente se supone
+    $('#modal').remove();
       fetch(this.url + "?_vp&pid=" + pid)
         .then(resp => resp.json())
         .then(mpresp => {
@@ -100,8 +102,6 @@ const app_myposts = {
           $('.modal').modal('show');
         })
         .catch(err => console.error(err));
-              // elimina cualquier modal existente se supone
-      $('#modal').remove();
     },       
     editarPost: function(pid) {
       fetch(this.url + "?_vp&pid=" + pid)
