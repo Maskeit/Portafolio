@@ -1,0 +1,42 @@
+{{#if tasks}}
+
+<div class="card p-3">
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">N.</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Operations</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    {{#each tasks}}
+    <tr>
+        <td>{{@index}}</td>
+        <td>{{title}}</td>
+        <td>{{description}}</td>
+        <td>
+            {{#if done}}
+                <a class="btn btn-secondary" href="/toogleDone/{{_id}}">Undone</a>
+            {{else}}
+                <a class="btn btn-success" href="/toogleDone/{{_id}}">Done</a>
+            {{/if}}
+
+
+            <a class="btn btn-danger" href="/delete/{{_id}}">Delete</a>
+            <a class="btn btn-warning" href="/edit/{{_id}}">Update</a>
+        </td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
+</div>
+{{else}}
+
+<div class="text-center">
+    <h4>No tasks</h4>
+</div>
+{{/if}}
