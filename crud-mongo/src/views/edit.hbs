@@ -1,0 +1,24 @@
+<div class="card p-4" style="margin-bottom:15px;">
+    <div class="card-header">
+    Update Task
+    </div>
+    <form action="/edit/{{task._id}}" method="post">
+        <div class="mb-3">
+        <label class="form-label" for="title">Update a title</label>
+        <input type="text" class="form-control" "title" id="" placeholder="titulo" value="{{task.title}}">
+        </div>
+
+        <div class="mb-3">
+        <label class="form-label"  for="description">Description</label>
+        <textarea
+            class="form-control"
+            name="description"
+            id="description"
+            placeholder="Description..."
+        >{{task.description}}</textarea>
+        </div>
+
+        <button class="btn btn-primary" "submit">Update</button>
+    </form>
+
+</div>
